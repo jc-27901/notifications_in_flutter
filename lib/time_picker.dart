@@ -74,7 +74,7 @@ class _TimePickerState extends State<TimePicker> {
     print('fetchId=');
 
     print(id);
-    var time = Time(00, min, 0);
+    var time = Time(hr, min, 0);
 
     // ignore: deprecated_member_use
     fltrNotification.showDailyAtTime(id, 'Times upp',
