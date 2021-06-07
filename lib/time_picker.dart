@@ -12,10 +12,10 @@ class TimePicker extends StatefulWidget {
 
 class _TimePickerState extends State<TimePicker> {
   String _selectedTime;
-
+  int id = 0;
   List<String> ist = [];
   FlutterLocalNotificationsPlugin fltrNotification;
-  Future<void> _show() async {
+  Future<void> _show(int id) async {
     final TimeOfDay result =
         await showTimePicker(context: context, initialTime: TimeOfDay.now());
     if (result != null) {
@@ -33,6 +33,7 @@ class _TimePickerState extends State<TimePicker> {
       // print(min);
       String pm = _selectedTime.substring(6);
       print(pm);
+      print(id);
       if (pm == 'PM') {
         hour = hour + 12;
         print(hour);
@@ -40,7 +41,8 @@ class _TimePickerState extends State<TimePicker> {
       ist.add(
         _selectedTime,
       );
-      _showNotification(hour, min, DateTime.now());
+
+      _showNotification(hour, min, id);
     }
   }
 
@@ -54,10 +56,8 @@ class _TimePickerState extends State<TimePicker> {
         onSelectNotification: notificationSelected);
   }
 
-  Future _showNotification(int hr, int min, DateTime fetchId) async {
+  Future _showNotification(int hr, int min, int id) async {
     notify();
-
-    int id = 0;
 
     var androidDetails = new AndroidNotificationDetails(
         "Channel ID", "Jay", "This is my channel",
@@ -70,30 +70,15 @@ class _TimePickerState extends State<TimePicker> {
     print('hello');
     print(hr);
     print(min);
-    var scheduledTime;
+
     print('fetchId=');
-    print(fetchId.second);
-    print(DateTime.now().second);
 
-    if (fetchId.minute == DateTime.now().minute) {
-      id++;
-      print(id);
-    }
+    print(id);
+    var time = Time(00, min, 0);
 
-    var time = Time(hr, min, 0);
-
-    // if (_selectedParam == 'Hour') {
-    //   scheduledTime = time;
-    // }
-    // if (_selectedParam == 'Minutes') {
-    //   scheduledTime = DateTime.now().add(Duration(minutes: val));
-    // }
-    // if (_selectedParam == 'Seconds') {
-    //   scheduledTime = DateTime.now().add(Duration(seconds: val));
-    // }
-
+    // ignore: deprecated_member_use
     fltrNotification.showDailyAtTime(id, 'Times upp',
-        "I am $id first Notification", time, generalNotificationDetails);
+        "I am  $id  first Notification", time, generalNotificationDetails);
   }
 
   @override
@@ -106,7 +91,11 @@ class _TimePickerState extends State<TimePicker> {
         ),
       ),
       floatingActionButton: ElevatedButton(
-        onPressed: _show,
+        onPressed: () {
+          id = id + 1;
+
+          _show(id);
+        },
         child: Text('Timepicker'),
       ),
     );
@@ -118,11 +107,4 @@ class _TimePickerState extends State<TimePicker> {
       builder: (context) => NotuseFull(),
     );
   }
-}
-
-class Demo {
-  final Function fnc;
-  final String date;
-
-  Demo({this.date, this.fnc});
 }

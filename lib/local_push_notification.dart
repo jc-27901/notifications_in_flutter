@@ -14,7 +14,6 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
 
   @override
   void initState() {
-    // var androidinitialise = AndroidInitializationSettings('ag');
     super.initState();
   }
 
@@ -40,20 +39,11 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
         NotificationDetails(android: androidDetails, iOS: iSODetails);
 
     print('hello');
-    var scheduledTime;
 
+    //time to show first notification
     var time = Time(11, 58, 0);
 
-    // if (_selectedParam == 'Hour') {
-    //   scheduledTime = time;
-    // }
-    // if (_selectedParam == 'Minutes') {
-    //   scheduledTime = DateTime.now().add(Duration(minutes: val));
-    // }
-    // if (_selectedParam == 'Seconds') {
-    //   scheduledTime = DateTime.now().add(Duration(seconds: val));
-    // }
-
+    // ignore: deprecated_member_use
     fltrNotification.showDailyAtTime(1, 'Times upp', "I am first Notification",
         time, generalNotificationDetails);
   }
@@ -71,8 +61,10 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
 
     print('hello1');
 
+//time to show first notification
     var time = Time(12, 20, 0);
 
+    // ignore: deprecated_member_use
     fltrNotification.showDailyAtTime(4, 'Second Notification',
         "I am second notification", time, generalNotificationDetails);
   }
@@ -89,20 +81,19 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
 
     print('hello2');
 
+//time to show first notification
     var time = Time(12, 45, 0);
 
+    // ignore: deprecated_member_use
     fltrNotification.showDailyAtTime(7, 'Third Notification',
         "I am third notification", time, generalNotificationDetails);
   }
 
   String task;
-  String _selectedParam;
+
   int val;
   @override
   Widget build(BuildContext context) {
-    _showNotification();
-    _showNotification1();
-    _showNotification2();
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -111,7 +102,11 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
           children: [
             Center(
               child: GestureDetector(
-                onTap: (() {}),
+                onTap: (() {
+                  _showNotification();
+                  _showNotification1();
+                  _showNotification2();
+                }),
                 child: Container(
                   height: 280,
                   width: 280,
