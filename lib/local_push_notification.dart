@@ -61,7 +61,7 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
 
     print('hello1');
 
-//time to show first notification
+    //time to show second notification
     var time = Time(12, 20, 0);
 
     // ignore: deprecated_member_use
@@ -81,7 +81,7 @@ class _SendNotificationScreenState extends State<SendNotificationScreen> {
 
     print('hello2');
 
-//time to show first notification
+    //time to show third notification
     var time = Time(12, 45, 0);
 
     // ignore: deprecated_member_use
